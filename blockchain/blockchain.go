@@ -2,6 +2,7 @@ package blockchain
 
 import (
 	"fmt"
+
 	"github.com/dgraph-io/badger"
 )
 
@@ -11,14 +12,14 @@ const (
 
 // BlockChain block chain
 type BlockChain struct {
-	LastHash   []byte
+	LastHash []byte
 	Database *badger.DB
 }
 
 // BlockChainInterator interact through database
 type BlockChainInterator struct {
 	CurrentHash []byte
-	Database *badger.DB
+	Database    *badger.DB
 }
 
 // InitBlockChain initialize the first block
@@ -43,7 +44,7 @@ func InitBlockChain() *BlockChain {
 			lastHash = genesis.Hash
 
 			return err
-		}else {
+		} else {
 			item, err := txn.Get([]byte("lh"))
 			Handle(err)
 			lastHash, err = item.Value()
